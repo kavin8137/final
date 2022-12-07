@@ -21,15 +21,15 @@ the Activity Bar. Next, select the project you'd like to run from the
 drop down list at the top of the Side Bar. Lastly, click the green 
 arrow or "start debugging" button.
 
-## Game Feature
+## Game Features
 Both players will have two buttons to control their rackets. To begin the game,
 you would have to press "ENTER" to release the rackets. Player 1 will be using 
 "W" and "S" keys for moving the racket vertically while Player 2 will be using 
 "Up Arrow" and "Down Arrow".
-```
-A hiden feature is in the game that will not be shown at this introduction. Play
-the game and find out the hiden feature to assist you to win the game!
-```
+
+**A hiden feature is in the game that will not be shown at this introduction. Play
+the game and find out the hiden feature to assist you to win the game!**
+
 
 ## Project Structure
 The project file s and folders are organized as follows:
