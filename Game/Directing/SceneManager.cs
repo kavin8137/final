@@ -16,6 +16,7 @@ namespace Final.Game.Directing
         public static PhysicsService PhysicsService = new RaylibPhysicsService();
         public static VideoService VideoService = new RaylibVideoService(Constants.GAME_NAME,
             Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.BLACK);
+        private PlaySoundAction sg = new PlaySoundAction(AudioService, Constants.START_SOUND);
         public SceneManager()
         {
         }
@@ -38,9 +39,13 @@ namespace Final.Game.Directing
             {
                 PrepareInPlay(cast, script);
             }
+            else if (scene == Constants.GAME_OVER1)
+            {
+                PrepareGameOver(cast, script, Constants.WAS_GOOD_GAME);
+            }
             else if (scene == Constants.GAME_OVER)
             {
-                PrepareGameOver(cast, script);
+                PrepareGameOver(cast, script, Constants.WAS_GOOD_GAME1);
             }
         }
 
@@ -66,7 +71,7 @@ namespace Final.Game.Directing
             AddUnloadActions(script);
             AddReleaseActions(script);
 
-            PlaySoundAction sg = new PlaySoundAction(AudioService, Constants.START_SOUND);
+            // PlaySoundAction sg = new PlaySoundAction(AudioService, Constants.START_SOUND);
             script.AddAction(Constants.OUTPUT, sg);
         }
 
@@ -124,13 +129,15 @@ namespace Final.Game.Directing
         
         }
 
-        private void PrepareGameOver(Cast cast, Script script)
+        private void PrepareGameOver(Cast cast, Script script, string message)
         {
             AddBall(cast);
             AddRacket(cast);
-            AddDialog(cast, Constants.WAS_GOOD_GAME);
-
+            AddDialog(cast, message);
+            // script.RemoveAction(Constants.OUTPUT, sa);
+            // AudioService.UnloadSound(Constants.START_SOUND);
             script.ClearAllActions();
+
 
             TimedChangeSceneAction ta = new TimedChangeSceneAction(Constants.NEW_GAME, 5, DateTime.Now);
             script.AddAction(Constants.INPUT, ta);
@@ -228,12 +235,16 @@ namespace Final.Game.Directing
             cast.ClearActors(Constants.LIVES_GROUP);
 
             Text text = new Text(Constants.LIVES_FORMAT, Constants.FONT_FILE, Constants.FONT_SIZE, 
+                Constants.ALIGN_LEFT, Constants.WHITE);
+            Text text1 = new Text(Constants.LIVES_FORMAT1, Constants.FONT_FILE, Constants.FONT_SIZE,
                 Constants.ALIGN_RIGHT, Constants.WHITE);
-            Point position = new Point(Constants.SCREEN_WIDTH - Constants.HUD_MARGIN, 
-                Constants.HUD_MARGIN);
+            Point position = new Point(0, Constants.HUD_MARGIN);
+            Point position1 = new Point(Constants.SCREEN_WIDTH - Constants.HUD_MARGIN, Constants.HUD_MARGIN);
 
             Label label = new Label(text, position);
-            cast.AddActor(Constants.LIVES_GROUP, label);   
+            Label label1 = new Label(text1, position1);
+            cast.AddActor(Constants.LIVES_GROUP, label); 
+            cast.AddActor(Constants.LIVES_GROUP, label1);
         }
 
         private void AddRacket(Cast cast)
@@ -243,18 +254,39 @@ namespace Final.Game.Directing
             int x = Constants.CENTER_X / 2 - Constants.RACKET_WIDTH / 2;
             int x1 = 3 * x;
             int y = Constants.SCREEN_HEIGHT / 2 - Constants.RACKET_HEIGHT / 2;
+            int topy = Constants.SCREEN_HEIGHT / 2 - Constants.RACKET_HEIGHT / 2 - 3;
+            int bottomy = y + (Constants.RACKET_HEIGHT) - 3;
         
             Point position = new Point(x, y);
+
+            Point topPos = new Point(x, topy);
+            Point bottomPos = new Point(x, bottomy);
+
+            Point topPos1 = new Point(x1, topy);
+            Point bottomPos1 = new Point(x1, bottomy);
+
             Point position1 = new Point(x1, y);
+
             Point size = new Point(Constants.RACKET_WIDTH, Constants.RACKET_HEIGHT);
+
+            Point topsize = new Point(Constants.RACKET_WIDTH, 5);
+            Point bottomsize = new Point(Constants.RACKET_WIDTH, 5);
+
             Point velocity = new Point(0, 0);
         
             Body body = new Body(position, size, velocity);
+            Body topBody = new Body(topPos, topsize, velocity);
+            Body bottomBody = new Body(bottomPos, bottomsize, velocity);
+
+            Body topBody1 = new Body(topPos1, topsize, velocity);
+            Body bottomBody1 = new Body(bottomPos1, bottomsize, velocity);
             Body body1 = new Body(position1, size, velocity);
+
             Animation animation = new Animation(Constants.RACKET_IMAGES, Constants.RACKET_RATE, 0);
             Animation animation1 = new Animation(Constants.RACKET1_IMAGES, Constants.RACKET_RATE, 0);
-            Racket racket = new Racket(body, animation, false);
-            Racket racket1 = new Racket(body1, animation1, false);
+            Racket racket = new Racket(body, topBody, bottomBody, animation, false);
+            Racket racket1 = new Racket(body1, topBody1, bottomBody1, animation1, false);
+
         
             cast.AddActor(Constants.RACKET_GROUP, racket);
             cast.AddActor(Constants.RACKET_GROUP, racket1);
@@ -269,14 +301,16 @@ namespace Final.Game.Directing
             Point position = new Point(Constants.CENTER_X, Constants.HUD_MARGIN);
             
             Label label = new Label(text, position);
-            cast.AddActor(Constants.SCORE_GROUP, label);   
+            // cast.AddActor(Constants.SCORE_GROUP, label);
         }
 
         private void AddStats(Cast cast)
         {
             cast.ClearActors(Constants.STATS_GROUP);
             Stats stats = new Stats();
+            Stats stats1 = new Stats();
             cast.AddActor(Constants.STATS_GROUP, stats);
+            cast.AddActor(Constants.STATS_GROUP, stats1);
         }
 
         private List<List<string>> LoadLevel(string filename)

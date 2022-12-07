@@ -42,7 +42,7 @@ namespace Final.Game.Scripting
             }
             else if (x >= Constants.FIELD_RIGHT - Constants.BALL_WIDTH)
             {
-                Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
+                Stats stats = (Stats)cast.GetSecondActor(Constants.STATS_GROUP);
                 stats.RemoveLife();
 
                 if (stats.GetLives() > 0)
@@ -51,7 +51,7 @@ namespace Final.Game.Scripting
                 }
                 else
                 {
-                    callback.OnNext(Constants.GAME_OVER);
+                    callback.OnNext(Constants.GAME_OVER1);
                     _audioService.PlaySound(overSound);
                 }
             }

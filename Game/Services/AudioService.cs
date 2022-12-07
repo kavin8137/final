@@ -31,5 +31,6 @@ namespace Final.Game.Services
         /// Unloads the cached sounds.
         /// </summary>
         void UnloadSounds();
+        void UnloadSound(string filepath);
     }
 }

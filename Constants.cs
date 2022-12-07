@@ -32,9 +32,9 @@ namespace Final
 
         // SOUND
         public static string BOUNCE_SOUND = "Assets/Sounds/boing.wav";
-        public static string WELCOME_SOUND = "Assets/Sounds/start.wav";
-        public static string OVER_SOUND = "Assets/Sounds/over.wav";
-        public static string START_SOUND = "Assets/Sounds/Pixelland.wav";
+        public static string WELCOME_SOUND = "Assets/Sounds/start1.mp3";
+        public static string OVER_SOUND = "Assets/Sounds/defeat.mp3";
+        public static string START_SOUND = "Assets/Sounds/Run-Amok.mp3";
 
         // TEXT
         public static int ALIGN_LEFT = 0;
@@ -62,6 +62,7 @@ namespace Final
         public static string NEXT_LEVEL = "next_level";
         public static string IN_PLAY = "in_play";
         public static string GAME_OVER = "game_over";
+        public static string GAME_OVER1 = "game_over1";
 
         // LEVELS
         public static string LEVEL_FILE = "Assets/Data/level-{0:000}.txt";
@@ -95,7 +96,8 @@ namespace Final
         public static string LIVES_GROUP = "lives";
         public static string SCORE_GROUP = "score";
         public static string LEVEL_FORMAT = "LEVEL: {0}";
-        public static string LIVES_FORMAT = "LIVES: {0}";
+        public static string LIVES_FORMAT = "PLAYER 1: {0}";
+        public static string LIVES_FORMAT1 = "PLAYER 2: {0}";
         public static string SCORE_FORMAT = "SCORE: {0}";
 
         // BALL
@@ -107,6 +109,11 @@ namespace Final
 
         // RACKET
         public static string RACKET_GROUP = "rackets";
+        
+        public static List<string> RACKET_TOP 
+            = new List<string>() {
+            "Assets/Images/Testing.png"
+            };
         
         public static List<string> RACKET_IMAGES
             = new List<string>() {
@@ -189,7 +196,8 @@ namespace Final
         public static string DIALOG_GROUP = "dialogs";
         public static string ENTER_TO_START = "PRESS ENTER TO START";
         public static string PREP_TO_LAUNCH = "PREPARING TO LAUNCH";
-        public static string WAS_GOOD_GAME = "GAME OVER";
+        public static string WAS_GOOD_GAME = "GAME OVER, PLAYER 1 WINS!";
+        public static string WAS_GOOD_GAME1 = "GAME OVER, PLAYER 2 WINS!";
 
     }
 }

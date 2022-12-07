@@ -77,6 +77,10 @@ namespace Final.Game.Casting
             int index = _random.Next(velocities.Count);
             double vx = velocities[index];
             double vy = _random.Next(-5,5);
+            while (vy == -1 || (vy == 0 || vy == 1))
+            {
+                vy = _random.Next(-5,5);
+            }
             Point newVelocity = new Point((int)vx, (int)vy);
             _body.SetVelocity(newVelocity);
         }

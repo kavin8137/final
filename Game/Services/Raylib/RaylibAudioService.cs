@@ -62,6 +62,11 @@ namespace Final.Game.Services
                 Raylib.UnloadSound(raylibSound);
             }
         }
+        public void UnloadSound(string filepath)
+        {
+            Raylib_cs.Sound raylibSound = _sounds[filepath];
+            Raylib.UnloadSound(raylibSound);
+        }
 
         private List<string> GetFilepaths(string directory, List<string> filters)
         {
