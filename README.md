@@ -4,7 +4,8 @@ behind your racket from the attack of your component! Both you and your
 component have 3 lives each and there is additional bricks to protect 
 your wall from being attacked. Each time there is a fifty percent chance
 that you or your component will loose a life if the ball hits two blocks
-at the same time. Let's try to compete your component and enjoy the victory!
+at the same time. Let's try to compete with your component and enjoy 
+the victory!
 
 ## Getting Started
 Make sure you have dotnet 6.0 or newer installed on your machine. Open
@@ -21,10 +22,14 @@ drop down list at the top of the Side Bar. Lastly, click the green
 arrow or "start debugging" button.
 
 ## Game Feature
-Both player will have two buttons to control their rackets. To begin the game,
+Both players will have two buttons to control their rackets. To begin the game,
 you would have to press "ENTER" to release the rackets. Player 1 will be using 
 "W" and "S" keys for moving the racket vertically while Player 2 will be using 
 "Up Arrow" and "Down Arrow".
+```
+A hiden feature is in the game that will not be shown at this introduction. Play
+the game and find out the hiden feature to assist you to win the game!
+```
 
 ## Project Structure
 The project file s and folders are organized as follows:
